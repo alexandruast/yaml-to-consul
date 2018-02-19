@@ -1,0 +1,18 @@
+import_path: projects/online_store
+
+environments:
+  - development
+  - qa
+  - production
+
+scheduler_api_url:
+  https://nomad.os.service.consul
+
+source_control_url:
+  https://bitbucket.service.consul
+
+ci_automation_url:
+  https://jenkins.os.service.consul
+
+artifact_repository_url:
+  https://nexus.os.service.consul

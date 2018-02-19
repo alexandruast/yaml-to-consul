@@ -1,0 +1,20 @@
+consul:
+  - host: localhost
+    port: 8500
+    token: None
+    scheme: http
+    consistency: default
+    dc: None
+    verify: True
+    cert: None
+    clear: True
+  
+  - host: 127.0.0.1
+    port: 8500
+    token: None
+    scheme: http
+    consistency: default
+    dc: None
+    verify: True
+    cert: None
+    clear: False

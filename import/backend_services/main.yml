@@ -1,0 +1,20 @@
+import_path: projects/backend_services
+
+environments:
+  - engineering
+  - development
+  - staging
+  - production
+  - training
+
+scheduler_api_url:
+  https://nomad.service.consul
+
+source_control_url:
+  https://bitbucket.service.consul
+
+ci_automation_url:
+  https://jenkins.service.consul
+
+artifact_repository_url:
+  https://nexus.service.consul
