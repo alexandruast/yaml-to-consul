@@ -30,7 +30,7 @@ Data will be stored in version control(git/bitbucket), as multiple YAML files.
 After every change, the YAMLs will be parsed, converted to JSON format that Consul understands, tested, and then deployed into Consul.  
 
 #### Local testing
-OS requirements: python, python-pip
+OS requirements: python, python-pip  
 You will need a consul server somewhere, you can install and start your own:
 ```
 wget https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip
