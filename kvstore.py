@@ -43,7 +43,7 @@ def to_entries(dict):
         #    raise ValueError('Nested items not supported in consul: {}.{}'.format(key, value))
         item = {}
         item["key"] = key
-        item["value"] = value
+        item["value"] = str(value)
         a.append(item)
     return a
 
