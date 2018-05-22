@@ -62,5 +62,5 @@ python ./kvstore.py
 
 Running tests(optional):
 ```
-python ./test/test_kvstore.py
+python ./tests/test_kvstore.py
 ```
