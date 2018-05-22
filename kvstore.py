@@ -11,7 +11,6 @@ import os
 import argparse
 import yaml
 # import json
-import base64
 import consul
 
 
@@ -44,7 +43,7 @@ def to_entries(dict):
         #    raise ValueError('Nested items not supported in consul: {}.{}'.format(key, value))
         item = {}
         item["key"] = key
-        item["value"] = base64.b64encode(str(value).encode('ascii')).decode('ascii')
+        item["value"] = value
         a.append(item)
     return a
 
