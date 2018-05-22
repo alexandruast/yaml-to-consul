@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -ex
 cd /project
-wget https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip
+curl -LSs https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip
 unzip consul_1.0.6_linux_amd64.zip
 mv ./consul /usr/bin/consul
 rm -f consul_1.0.6_linux_amd64.zip
