@@ -1,11 +1,9 @@
-import_path: projects/backend_services
+import_path: projects/foo
 
 environments:
-  - engineering
-  - development
-  - staging
+  - integration
+  - qa
   - production
-  - training
 
 scheduler_api_url:
   https://nomad.service.consul
