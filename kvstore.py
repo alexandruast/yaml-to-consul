@@ -32,7 +32,7 @@ def is_valid_key(key):
     if text != key:
         return False
 
-    return bool(re.match("^[A-Za-z0-9\_\.\/]*$", text))
+    return bool(re.match("^[A-Za-z0-9\_\.\/\-]*$", text))
 
 
 # Converts a dict into consul format list: [{"key": k, "value": base64e(v)}]
@@ -154,11 +154,11 @@ def main():
             )
 
             if c_server['clear'] is True:
-                print("[info] Deleting all records from {}...".format(
-                    str(c_server['host']) + ':' + str(c_server['port'])
+                print("[info] Deleting records from {}...".format(
+                    str(c_server['host']) + ':' + str(c_server['port'] + c_server['path'])
                     )
                 )
-                c_consul.kv.delete('', recurse=True)
+                c_consul.kv.delete(c_server['path'], recurse=True)
 
             print("[info] Importing {} records into {}...".format(
                 len(d_import),

@@ -8,6 +8,7 @@ consul:
     verify: True
     cert: None
     clear: True
+    path: projects
   
   - host: 127.0.0.1
     port: 8500
@@ -18,3 +19,4 @@ consul:
     verify: True
     cert: None
     clear: False
+    path: projects
