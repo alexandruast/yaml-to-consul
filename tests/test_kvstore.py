@@ -22,7 +22,7 @@ class BasicTestSuite(unittest.TestCase):
 
     def test_to_entries_single(self):
         d_single_item = {"key": "value"}
-        l_single_item_output = [{"key": "key", "value": "dmFsdWU="}]
+        l_single_item_output = [{"key": "key", "value": "value"}]
 
         self.assertCountEqual(
             kvstore.to_entries(d_single_item), l_single_item_output
@@ -35,8 +35,8 @@ class BasicTestSuite(unittest.TestCase):
         }
 
         l_multi_item_output = [
-            {"key": "key1", "value": "dmFsdWUx"},
-            {"key": "key2", "value": "dmFsdWUy"}
+            {"key": "key1", "value": "value1"},
+            {"key": "key2", "value": "value2"}
         ]
 
         self.assertCountEqual(
