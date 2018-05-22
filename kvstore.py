@@ -155,7 +155,7 @@ def main():
 
             if c_server['clear'] is True:
                 print("[info] Deleting records from {}...".format(
-                    str(c_server['host']) + ':' + str(c_server['port'] + c_server['path'])
+                    str(c_server['host']) + ':' + str(c_server['port'])
                     )
                 )
                 c_consul.kv.delete(c_server['path'], recurse=True)
