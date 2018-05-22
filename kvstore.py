@@ -32,7 +32,7 @@ def is_valid_key(key):
     if text != key:
         return False
 
-    return bool(re.match("^[A-Za-z0-9\_\.\/]*$", text))
+    return bool(re.match("^[A-Za-z0-9\_\.\/-]*$", text))
 
 
 # Converts a dict into consul format list: [{"key": k, "value": base64e(v)}]

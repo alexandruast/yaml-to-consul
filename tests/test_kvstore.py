@@ -78,7 +78,7 @@ class BasicTestSuite(unittest.TestCase):
 
         for item in invalid_keys:
             self.assertFalse(kvstore.is_valid_key(item), msg="Item:{}".format(item))
-        for char in "!@#$%^&*(){}[]=+-`~\\|;'\",<>?":
+        for char in "!@#$%^&*(){}[]=+`~\\|;'\",<>?":
             item = "path/contains{}char".format(char)
             self.assertFalse(kvstore.is_valid_key(item), msg="Item:{}".format(item))
 
@@ -90,7 +90,8 @@ class BasicTestSuite(unittest.TestCase):
             "this.path/is.valid",
             "this.path.is/valid",
             "this_path_is/valid",
-            "_this_path_is/_valid"
+            "_this_path_is/_valid",
+            "this-path/is-valid"
         ]
 
         for item in valid_keys:
