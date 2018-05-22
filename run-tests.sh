@@ -13,4 +13,4 @@ set -ex \
 EOF
 )"
 
-docker run --rm -v "$(pwd):/project" python:3.6-alpine sc -c "${SCRIPT}"
+docker run --rm -v "$(pwd):/project" python:3.6-alpine sh -c "${SCRIPT}"
