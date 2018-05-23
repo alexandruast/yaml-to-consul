@@ -6,9 +6,9 @@ RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
 RUN apk add -q --no-cache curl unzip \
-&& curl -LSs https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip -o /tmp/consul_1.0.6_linux_amd64.zip \
-&& unzip /tmp/consul_1.0.6_linux_amd64.zip -d /usr/local/bin \
-&& (consul agent -dev >/dev/null &)
+&& curl -LSs https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip -o consul_1.0.6_linux_amd64.zip \
+&& unzip consul_1.0.6_linux_amd64.zip \
+&& (./consul agent -dev >/dev/null || kill -9 1) &
 
 COPY . .
 
