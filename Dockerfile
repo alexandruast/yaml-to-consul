@@ -7,12 +7,12 @@ WORKDIR $APP_HOME
 
 RUN apk add -q --no-cache curl unzip \
 && curl -LSs https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip -o consul_1.0.6_linux_amd64.zip \
-&& unzip consul_1.0.6_linux_amd64.zip \
-&& (./consul agent -dev >/dev/null || kill -9 1) &
+&& unzip consul_1.0.6_linux_amd64.zip
 
 COPY . .
 
-RUN pip install -r requirements.txt \
+RUN && (./consul agent -dev >/dev/null || kill -9 1) & \
+&& pip install -r requirements.txt \
 && python tests/test_kvstore.py \
 && python kvstore.py
 
