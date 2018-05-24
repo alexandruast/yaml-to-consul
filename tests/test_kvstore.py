@@ -100,5 +100,5 @@ class BasicTestSuite(unittest.TestCase):
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(BasicTestSuite)
-    ret = not unittest.TextTestRunner(verbosity=2, buffer=True).run(suite).wasSuccessful()
+    ret = not unittest.TextTestRunner(stream=sys.stdout, verbosity=2, buffer=True).run(suite).wasSuccessful()
     sys.exit(ret)
