@@ -11,7 +11,7 @@ RUN apk add -q --no-cache curl unzip \
 
 COPY . .
 
-RUN (./consul agent -dev >/dev/null || kill -9 1 &) \
+RUN (./consul agent -dev >/dev/null 2>&1 &) \
 && pip install -r requirements.txt \
 && python tests/test_kvstore.py \
 && python kvstore.py
