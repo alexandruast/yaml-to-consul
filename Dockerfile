@@ -1,4 +1,4 @@
-FROM python:3.6-alpine as BUILD
+FROM python:3.6-alpine as BUILDER
 MAINTAINER Alexandru Ast <alexandru.ast@gmail.com>
 
 ENV APP_HOME=/build
@@ -24,8 +24,7 @@ COPY [ \
    "/" \
 ]
 
-RUN pip install -r requirements.txt \
-&& python kvstore.py --help
+RUN pip install -r requirements.txt
 
 VOLUME [ "/config", "/import" ]
 
