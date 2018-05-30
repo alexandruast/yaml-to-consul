@@ -162,8 +162,9 @@ def main():
 
             # Creating a delete keys array
             d_delete = []
-            for content in d_export:
-                d_delete.append(content['Key'])
+            if d_export is not None:
+                for content in d_export:
+                    d_delete.append(content['Key'])
             for content in d_import:
                 try:
                     d_delete.remove(content['key'])
