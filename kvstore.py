@@ -10,7 +10,7 @@ import re
 import os
 import argparse
 import yaml
-# import json
+import json
 import consul
 
 
@@ -38,11 +38,17 @@ def is_valid_key(key):
 def to_entries(dict):
     a = []
     for key, value in dict.items():
-        # We accept nested blocks, to be decoded with jq
-        # if isinstance(value, type({})) or isinstance(value, type([])):
-        #    raise ValueError('Nested items not supported in consul: {}.{}'.format(key, value))
         item = {}
         item["key"] = key
+
+        # We accept nested blocks, do we have a valid JSON object?
+        s_json = str(value).replace("'", '"')
+        try:
+            json.loads(s_json)
+            value = s_json
+        except ValueError:
+            pass
+
         item["value"] = str(value)
         a.append(item)
     return a
@@ -152,12 +158,26 @@ def main():
                 cert=None if c_server['cert'] == 'None' else c_server['cert']
             )
 
-            if c_server['clear'] is True:
+            index, d_export = c_consul.kv.get(c_server['path'], recurse=True)
+
+            # Creating a delete keys array
+            d_delete = []
+            for content in d_export:
+                d_delete.append(content['Key'])
+            for content in d_import:
+                try:
+                    d_delete.remove(content['key'])
+                except ValueError:
+                    pass
+
+            if c_server['clear'] is True and len(d_delete) != 0:
                 print("[info] Deleting records from {}...".format(
                     str(c_server['host']) + ':' + str(c_server['port'])
                     )
                 )
-                c_consul.kv.delete(c_server['path'], recurse=True)
+                for key in d_delete:
+                    print("[info] {} deleted".format(key))
+                    c_consul.kv.delete(key)
 
             print("[info] Importing {} records into {}...".format(
                 len(d_import),
