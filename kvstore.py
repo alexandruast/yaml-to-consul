@@ -160,26 +160,37 @@ def main():
 
             index, d_export = c_consul.kv.get(c_server['path'], recurse=True)
 
-            # Creating a delete keys array
-            d_delete = []
+            # Items to delete
+            to_delete = []
+
+            # add all exported pairs in items to_delete list
             if d_export is not None:
                 for content in d_export:
-                    d_delete.append(content['Key'])
+                    to_delete.append(content['Key'])
+
+            # remove imported pairs from to_delete list
             for content in d_import:
                 try:
-                    d_delete.remove(content['key'])
+                    to_delete.remove(content['key'])
                 except ValueError:
                     pass
 
-            if c_server['clear'] is True and len(d_delete) != 0:
+            # remove items with placeholders from import list
+            for content in d_import:
+                if content['value'] == "%%NOREPLACE%%":
+                    d_import.remove(content)
+
+            # delete items
+            if c_server['clear'] is True and len(to_delete) != 0:
                 print("[info] Deleting records from {}...".format(
                     str(c_server['host']) + ':' + str(c_server['port'])
                     )
                 )
-                for key in d_delete:
+                for key in to_delete:
                     print("[info] {} deleted".format(key))
                     c_consul.kv.delete(key)
 
+            # import items
             print("[info] Importing {} records into {}...".format(
                 len(d_import),
                 str(c_server['host']) + ':' + str(c_server['port'])
@@ -188,7 +199,7 @@ def main():
 
             to_consul(c_consul, d_import)
 
-    print("[info] Done importing records into Consul.")
+    print("[info] Done importing records into Consul")
 
 
 if __name__ == "__main__":
